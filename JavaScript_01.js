@@ -130,3 +130,48 @@ function myfun2(){
     }
 }
 
+/* this / Prototype
+   -this
+   -Prototypes
+   -class{}
+*/
+var workshop={
+    teacher: "kyle",
+ask(question){
+    console.log(this.teacher, question);
+},
+};
+
+workshop.ask("What is implicit binding?");
+
+function ask(question) {
+    console.log(this.teacher, question);
+}
+
+function myfun4(){
+    var info={
+        teacher: "Suzy"
+    };
+    ask.call(info,"What is this");
+}
+myfun4();
+{
+    let info={
+        teacher: "Lizeal"
+    };
+    ask.call(info,"How are you");
+}
+
+class Workshop {
+    constructor(instructor){
+        this.instructor=instructor;
+    }
+    ask(question) {
+        console.log(this.instructor, question);
+    }
+}
+
+var instructor1=new Workshop("Prabin");
+var instructor2=new Workshop("Kumar");
+instructor1.ask("What do you do?");
+instructor2.ask("Whats your address?");
