@@ -59,3 +59,23 @@ disp(function(){
     return "Prabin";
 })
 
+// Arrow Function
+
+var operation3 = () => {return "Hi, this is arrow function"};
+console.log(operation3());
+
+var operation4 = (a,b) => {return a+b}
+console.log(operation4(4,5));
+
+// Immediately Invoked Function Expression (IIFE)
+(
+ function (){
+     console.log("Hello, This is IIFE");
+ }
+)();
+
+(
+    function (a,b,c){
+        console.log(a+b+c);
+    }
+)(5,3,4);
