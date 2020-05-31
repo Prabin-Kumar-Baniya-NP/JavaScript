@@ -82,12 +82,12 @@ var class1 = function (a){
 };
 
 var class2 = function (b) {
-    class1.call(this, a);
+    class1.call(this);
     this.b = b;
 };
 
 var class3 = function (c) {
-    class1.call(this, a);
+    class1.call(this);
     this.c = c;
 };
 
