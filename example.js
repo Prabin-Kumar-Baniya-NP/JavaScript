@@ -76,3 +76,28 @@ console.log(ram.food_name);
 console.log(shyam.min_money);
 console.log(gita.check_requirement());
 
+
+var class1 = function (a){
+    this.a = a;
+};
+
+var class2 = function (b) {
+    class1.call(this, a);
+    this.b = b;
+};
+
+var class3 = function (c) {
+    class1.call(this, a);
+    this.c = c;
+};
+
+var obj1 = new class1(10);
+var obj2 = new class2(20);
+var obj3 = new class3(30);
+
+console.log(obj1.a);
+console.log(obj2.b);
+console.log(obj3.c);
+console.log(obj2.a);
+console.log(obj3.a);
+
