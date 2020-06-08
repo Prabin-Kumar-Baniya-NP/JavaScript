@@ -29,7 +29,7 @@ console.log(car.colour())
 console.log(car.model)
 
 // Creating Object Using Object Constructor
-var computer1 = {}
+var computer1 = new Object();
 // Creating Object Properties
 computer1['RAM'] = '4 GB'
 computer1['Processor'] = 'i5 8th Generation'
@@ -120,7 +120,7 @@ if ('price' in lava) {
 
 // To check object properties
 console.log(Object.keys(huawei))
-
+// (6) [0, 1, 2, 3, 4, 5]
 // Iterating over the object properties using for loop
 for (var specs in huawei) {
   if (typeof huawei[specs] != 'function') {

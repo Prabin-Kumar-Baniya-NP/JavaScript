@@ -20,7 +20,9 @@ var Bottom = function(name){
 
 // Prototype Inheritance
 Middle.prototype = Object.create(Top.prototype);
+Middle.prototype.constructor = Middle;
 Bottom.prototype = Object.create(Middle.prototype);
+Bottom.prototype.constructor = Bottom;
 
 // Creating Objects
 var T = new Top("T");
@@ -76,3 +78,13 @@ console.log(B_1.y);
 console.log(B_1.x);
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
+var obj_1 = new Object;
+var obj_2 = new Object;
+
+
+obj_1.p = 111;
+obj_2.q = 222;
+
+var obj_3 = Object.assign({}, obj_1, obj_2);
+console.log(obj_3.p); // 111
+console.log(obj_3.q); // 222

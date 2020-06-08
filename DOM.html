@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>getElementById</title>
+</head>
+
+<body>
+    <h1>Welcome Dear</h1>
+    <p id="hero">Welcome to Web Development</p>
+    <p id="hero-description">Lorem ipsum dolor sit amet consectetur, <span class="important-content">Quasi totam quis </span> elit. Quasi totam quis, repellat iure
+        placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
+        Culpa nesciunt harum possimus.</p>
+    <p class="extra-notes">Lorem ipsum dolor sit amet consectetur, <span>Quasi totam quis </span> elit. Quasi totam quis, repellat iure
+        placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
+        Culpa nesciunt harum possimus.</p>
+    <h3 class="extra-notes">Lorem ipsum dolor sit amet consectetur, </h3>
+    <div id ="here">
+        <p class="description">Lorem ipsum dolor sit amet consectetur, <span class="content">Quasi totam quis </span> elit. Quasi totam quis, repellat iure
+            placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
+            Culpa nesciunt harum possimus.</p>
+    </div>
+<script>
+    // getElementById
+    var result1 = document.getElementById("hero");
+    document.write(result1);
+    console.log(result1)
+
+    //getElementByTagName
+    var result2 = document.getElementsByTagName("p");
+    var result3 = document.getElementsByTagName("*");
+    var len = document.getElementsByTagName("p").length;
+    document.write(result2 + "<br>");
+    console.log(result2);
+    console.log(result2[0]);
+    console.log(result2[1]);
+    console.log(result3);
+    console.log(len);
+
+    // Using both getElementById and getElementByTagName
+    var result4 = document.getElementById("hero-description").getElementsByTagName("span");
+    document.write(result4 + "<br>");
+    console.log(result4);
+
+    // Using For loop in getElementByTagName
+    for(var i=0;i<len;i++){
+        let result5 = document.getElementsByTagName("p")[i];
+        document.write(result5 + "<br>");
+    }
+
+    // getElementByClassName
+    var result6 = document.getElementsByClassName("extra-notes");
+    document.write(result6 + "<br>")
+    console.log(result6); 
+
+    // Using both getElementById and getElementByClassName
+    var result7 = document.getElementById("hero-description").getElementsByClassName("important-content");
+    document.write(result7);
+    console.log(result7);
+
+    // querySelector
+    //  ----Element Selector
+    var result8 = document.querySelector("p")         // First Come First get i.e it will return p
+    var result9 = document.querySelector("p, h1")     // First come first get i.e it will return h1
+    document.write(result8 + "<br>");
+    console.log(result8);
+    document.write(result9 + "<br>");
+    console.log(result9);
+
+    // -----ID Selector
+    var result10 = document.querySelector("#hero-description");         // It will return hero-description
+    var result11 = document.querySelector("#hero, #hero-description");  // It will return only hero
+    document.write(result10 + "<br>");
+    document.write(result11 + "<br>");
+    console.log(result10);
+    console.log(result11);
+
+    // querySelectorAll
+    // -----Element Selector
+    var result12 = document.querySelectorAll("p");
+    var result13 = document.querySelectorAll("p, h1");
+    document.write(result12 + "<br>");  // returns [objectNodelist]
+    document.write(result13 + "<br>");
+    console.log(result12);  // NodeList(3) [p#hero, p#hero-description, p.extra-notes]
+    console.log(result13);  // NodeList(4) [h1, p#hero, p#hero-description, p.extra-notes]
+
+    // -----Id Selector
+    var result14 = document.querySelectorAll("#hero, #hero-description");
+    document.write(result14 + "<br>");
+    console.log(result14); // NodeList(2) [p#hero, p#hero-description]
+
+    // ----Class Selector
+    var result15 = document.querySelectorAll(".extra-notes");
+    document.write(result15 + "<br>");
+    console.log(result15); // NodeList(2) [p.extra-notes, h3.extra-notes]
+
+    // Attribute Selector
+    var result16 = document.querySelectorAll("p[id]");
+    document.write(result16 + "<br>");
+    console.log(result16); // NodeList(2) [p#hero, p#hero-description]
+    var result17 = document.querySelectorAll("p[class = 'extra-notes']");
+    document.write(result17 + "<br>");
+    console.log(result17);  // NodeList [p.extra-notes]
+
+    // More Specific
+    var result18 = document.querySelectorAll("#here > .description > span.content");
+    var result18_len = document.querySelectorAll("#here > .description > span.content").length;
+    document.write("More Specific" + "<br>" + result18 + "<br>");
+    console.log(result18);  // NodeList [span.content]
+    console.log(result18_len); // 1
+
+</script>
+</body>
+
+</html>
