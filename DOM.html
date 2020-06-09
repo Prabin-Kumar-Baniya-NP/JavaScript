@@ -2,10 +2,10 @@
 <html>
 
 <head>
-    <title>getElementById</title>
+    <title>DOM</title>
 </head>
 
-<body>
+<body id="body">
     <h1>Welcome Dear</h1>
     <p id="hero">Welcome to Web Development</p>
     <p id="hero-description">Lorem ipsum dolor sit amet consectetur, <span class="important-content">Quasi totam quis </span> elit. Quasi totam quis, repellat iure
@@ -14,11 +14,13 @@
     <p class="extra-notes">Lorem ipsum dolor sit amet consectetur, <span>Quasi totam quis </span> elit. Quasi totam quis, repellat iure
         placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
         Culpa nesciunt harum possimus.</p>
-    <h3 class="extra-notes">Lorem ipsum dolor sit amet consectetur, </h3>
+    <h3 class="extra-notes" id = "extra-notes">Lorem ipsum dolor sit amet consectetur, </h3>
     <div id ="here">
         <p class="description">Lorem ipsum dolor sit amet consectetur, <span class="content">Quasi totam quis </span> elit. Quasi totam quis, repellat iure
             placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
             Culpa nesciunt harum possimus.</p>
+        <h1>Lorem</h1>
+        <h2>Ipsum</h2>
     </div>
 <script>
     // getElementById
@@ -109,6 +111,84 @@
     console.log(result18);  // NodeList [span.content]
     console.log(result18_len); // 1
 
+    // Node of the Element and Element Node of the Element
+    // parentNode and parentElement
+    var result19 = document.getElementById("hero");
+    console.log(result19.parentElement);  // Returns the Element Node of span, if not present returns null  -- body
+    console.log(result19.parentNode); // Returns the Node of the span  -- body
+
+    // childNodes and children
+    var result20 = document.getElementById("body");
+    console.log(result20.childNodes);  // Lists all the Nodes of the element which are under body and it can be accessed by index number
+    console.log(result20.childNodes[1]);
+    console.log(result20.children);    // list all the Element Nodes which comes under body, if not present returns null
+
+    // Firstchild and FirstElement child
+    var result21 = document.getElementById("body");
+    console.log(result20.firstChild);  // Returns the first child node 
+    console.log(result20.firstElementChild);  // Returns the first element child node, if not present returns null
+
+    // lastchild and lastElement child
+    var result21 = document.getElementById("body");
+    console.log(result21.lastChild);  // Returns last child node
+    console.log(result21.lastElementChild);  // Returns last Element child node
+
+    // previousSibling and previousElementSibling
+    var result22 = document.getElementById("hero");
+    console.log(result22.previousSibling);  // Returns previous sibling node
+    console.log(result22.previousElementSibling);  // Returns previous Sibling Element Node
+
+    // nextSibling and nextElementSibling
+    var result23 = document.getElementById("hero");
+    console.log(result23.nextSibling);  // Returns nextSibling node
+    console.log(result23.nextElementSibling);  // Returns next Element sibling node
+
+    // Creating Element Node
+    var nENode= document.createElement("h2");
+    console.log(nENode);  // <h2></h2>
+
+    // Creating Text Node
+    var nTNode = document.createTextNode("Hi This is String");
+    console.log(nTNode);  // "Hi This is String"
+
+    // Creating comment Node
+    var nCNode = document.createComment("I am a new Comment");
+    console.log(nCNode);  // <!-- I am a new Comment -->
+
+    // Creating Document Fragment
+    var df = document.createDocumentFragment();
+    console.log(df);  // #document-fragment
+
+    // Appending the Element Node
+    // ---------Appending the existing element node <h3> having id "extra-notes" to div having id "here"
+    // Syntax :-> Parent_Node.appendChild(Child_Node)
+    document.getElementById("here").appendChild(document.getElementById("extra-notes"));
+    //----------Appending new element node <h4> to div having id "extra-notes"
+    document.getElementById("here").appendChild(document.createElement("h4"));
+    console.log(document.getElementById("here"));
+
+    // Appending Text Node -- Syntax :-> Parent_Node.appendChild(Child_Node)
+    document.getElementById("here").appendChild(document.createTextNode("Text Node Created Successfully"));
+
+    // Appending Comment Node 
+    document.getElementById("here").appendChild(document.createComment("This is Comment from JavaScript"));
+    // Since we can't see comment in web page but lets see in console
+    console.log(document.getElementById("here"));
+
+    // Append Element Node and Text Node Together 
+    nElement = document.createElement("h5");
+    nText = document.createTextNode("This is h5 tag");
+    nElement.appendChild(nText);
+    console.log(nElement);  // <h5>This is h5 tag</h5>
+    target = document.getElementById("here");
+    target.appendChild(nElement);
+
+    // Create Element Node, add some content and then append to Document fragment and append it to div having id "here"
+    hnode = document.createElement("h2");
+    hnode.textContent = "This is h2 tag";
+    df = document.createDocumentFragment();
+    df.appendChild(hnode); 
+    document.getElementById("here").appendChild(df);
 </script>
 </body>
 
