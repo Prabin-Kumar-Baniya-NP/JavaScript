@@ -3,25 +3,61 @@
 
 <head>
     <title>DOM</title>
+    <style>
+        .description {
+            background-color: orange;
+            font-size: medium;
+        }
+        .important-content {
+            background-color: orchid;
+        }
+    </style>
 </head>
 
 <body id="body">
     <h1>Welcome Dear</h1>
     <p id="hero">Welcome to Web Development</p>
-    <p id="hero-description">Lorem ipsum dolor sit amet consectetur, <span class="important-content">Quasi totam quis </span> elit. Quasi totam quis, repellat iure
+    <p id="hero-description">Lorem ipsum dolor sit amet consectetur, <span class="important-content" id = "important-content">Quasi totam quis </span> elit. Quasi totam quis, repellat iure
         placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
         Culpa nesciunt harum possimus.</p>
     <p class="extra-notes">Lorem ipsum dolor sit amet consectetur, <span>Quasi totam quis </span> elit. Quasi totam quis, repellat iure
         placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
         Culpa nesciunt harum possimus.</p>
     <h3 class="extra-notes" id = "extra-notes">Lorem ipsum dolor sit amet consectetur, </h3>
-    <div id ="here">
+    <div id ="here" style="background-color: blue;">
         <p class="description">Lorem ipsum dolor sit amet consectetur, <span class="content">Quasi totam quis </span> elit. Quasi totam quis, repellat iure
             placeat, perspiciatis possimus velit mollitia pariatur a officia accusantium, ab molestiae reiciendis earum.
             Culpa nesciunt harum possimus.</p>
         <h1>Lorem</h1>
         <h2>Ipsum</h2>
     </div>
+    <ul id = "list">
+        <li id = "list1">C Programming</li>
+        <li id = "list2">C++ Programming</li>
+        <li id = "list3">Java Programming</li>
+        <li id = "list4">JavaScript</li>
+    </ul>
+    <ul id ="mobile-list">
+        <li>Samsung</li>
+        <li>Realme</li>
+        <li>Oppo</li>
+        <li>Xioami</li>
+    </ul>
+    <ul id = "food-list">
+        <li>Rice</li>
+        <li>Dal</li>
+        <li>Potato</li>
+    </ul>
+    <ul id ="transport">
+        <li>Bike</li>
+        <li>Car</li>
+        <li>Cycle</li>
+    </ul>
+    <ul id = "computer">
+        <li>Mouse</li>
+        <li>Keyboard</li>
+        <li>Monitor</li>
+    </ul>
 <script>
     // getElementById
     var result1 = document.getElementById("hero");
@@ -189,6 +225,170 @@
     df = document.createDocumentFragment();
     df.appendChild(hnode); 
     document.getElementById("here").appendChild(df);
+
+    // normalize() - Merges the text nodes into one
+    textNode1 = document.createTextNode("Hi");
+    textNode2 = document.createTextNode("This");
+    textNode3 = document.createTextNode("is");
+    textNode4 = document.createTextNode("JavaScript");
+    target = document.getElementById("here");
+    target.appendChild(textNode1);
+    target.appendChild(textNode2);
+    target.appendChild(textNode3);
+    target.appendChild(textNode4);
+    target.normalize();
+
+    // insertBefore();
+    // Adding new Node
+    // Syntax:- parentNode.insertBefore(newNode, referenceNode)
+    newNode = document.createElement("li");
+    newNode.textContent = "Python Programming";
+    referenceNode = document.getElementById("list2");
+    parentNode = document.getElementById("list");
+    parentNode.insertBefore(newNode, referenceNode);
+    console.log(parentNode.childNodes);
+    // Moving existing node
+    moveNode = document.getElementById("list3");
+    parentNode.insertBefore(moveNode, referenceNode);
+
+    // insertAdjacentElement()
+    // Syntax: targetNode.insertAdjacentElement('position', elementNode)
+    // position : beforebegin, afterbegin, beforeend, afterend
+    targetNode = document.getElementById("list3");
+    elementNode = document.createElement("span");
+    elementNode.textContent = "I want to learn "
+    targetNode.insertAdjacentElement('afterbegin', elementNode);
+
+    // insertAdjacentHTML()
+    // Syntax: targetNode.insertAdjacentHTML('position', element)
+    myhtml = "<b> I want to learn </b>";
+    targetNode = document.getElementById("list4");
+    targetNode.insertAdjacentHTML("afterbegin", myhtml);
+
+    // insertAdjacentText()
+    // Syntax: targetNode.insertAdjacentText('position', text);
+    targetNode = document.getElementById("list1");
+    targetNode.insertAdjacentText("afterbegin", "I want to learn ");
+
+    // innerHTML -- changes the content of inside that element targeted
+    target = document.getElementById("mobile-list");
+    target.innerHTML = "<li>India</li><li>China</li><li>Nepal</li>"
+
+    // outerHTML -- chnages the content as well as targeted element
+    target = document.getElementById("food-list");
+    target.outerHTML = "<p> This is food list</p>";
+
+    /* When we want to changed the content inside of an element, we use innerHTML,
+     but if we want to change the whole element as well as contents we use outerHTML */
+    
+    // innerText -- returns only text
+    target = document.getElementById("transport");
+    console.log(target.innerText);
+    target.innerText = "<b>Bike, Car, Cycle </b>";  // <b>Bike, Car, Cycle </b>
+
+    // outerText is also same like outerHTML, but it is not recommended to use;
+
+    // cloneNode(Boolean_Value) --- To copy node
+    // Boolean_Value = False --- Clones only element
+    // Boolean_Value = True  --- Clones element and its child
+    target = document.getElementById("mobile-list");
+    cloned_Node = target.cloneNode(true);
+    console.log(cloned_Node);
+    // Appending cloned Node to the document
+    document.getElementById("transport").appendChild(cloned_Node);
+
+    // removeChild() -- To delete the Node
+    // Node get deleted by exists in memory
+    // Lets delete a node and also save it for future
+    parent_Node = document.getElementById("list");
+    deleted_Node = parent_Node.removeChild(parent_Node.firstChild);
+    console.log(deleted_Node);
+
+    // replaceChild() -- To replace new or existing node with other;
+    // Creating new Node and replacing it;
+    new_Node = document.createElement("li");
+    new_Node.textContent = "Printer";
+    parent_Node = document.getElementById("computer");
+    target_Node = document.getElementById("computer").firstElementChild;
+    parent_Node.replaceChild(new_Node,target_Node);  // We can also store the old child in a variable for future use
+    // replacing existing node 
+    node_for_replacing = document.getElementById("computer").lastElementChild;
+    node_to_be_replaced = document.getElementById("computer").firstElementChild;
+    document.getElementById("computer").replaceChild(node_for_replacing,node_to_be_replaced);  // node_to_be_replaced gets replaced;
+
+    // Properties of Text Node
+    // length -- returns the length of string;
+    node = document.getElementById("hero").firstChild;
+    console.log(node.length); // 26
+    // Data -- Accessing Text Node data and changing its values;
+    console.log(node.data); // Welcome to Web Development
+    node.data = "Welcome to Python Programming!";
+    console.log(node.data); // Welcome to Python Programming!
+    // appendData(String) -- To append Text data in Text Node
+    node.appendData(" This is Ubuntu Operating system");
+    console.log(node.data); // Welcome to Python Programming! This is Ubuntu Operating system
+    // deleteData(start, length) -- To delete Text data 
+    node.deleteData(11, 7);  // Deletes "Python " from node.data
+    console.log(node.data);  // Welcome to Programming! This is Ubuntu Operating system
+    // insertData(start, "String") -- to insert data in specific postion
+    node.insertData(11, "Python ");
+    console.log(node.data); // Welcome to Python Programming! This is Ubuntu Operating system
+    // replaceData(start, length, "String") -- To replace data in specific position
+    node.replaceData(11, 6, "Java");
+    console.log(node.data); // Welcome to Java Programming! This is Ubuntu Operating system
+    // splitText(start) -- splits text into two different text nodes
+    node.splitText(28);
+    console.log(document.getElementById("hero").childNodes);
+    /* NodeList(2) [text, text]
+       0: text
+       1: text
+       length: 2
+       __proto__: NodeList
+    */       
+    // substringData(start, length) -- to get text according to our requirement
+    result = node.substringData(3, 5); // 5th char is not returned 
+    console.log(result); // come
+
+    // Attribute Property
+    element = document.getElementById("extra-notes");
+    console.log(element.attributes); // Returns the list of all attributes
+    console.log(element.attributes[1]); // returns id = "extra-notes"
+
+    // setAttribute(name, value) and getAttribute(name)
+    attr = element.getAttribute("id");  // Gives the value of this attribute
+    console.log(attr);  // returns extra-notes
+    element.setAttribute("style", "background-color: red;");
+
+    // removeAttribute() and hasAttribute()
+    element.removeAttribute("id");
+    bool = element.hasAttribute("id");
+    console.log(bool); // false
+
+    // HTML-DOM Mapping
+    /* Points to remember
+    => title attribute in HTML is represented as title in DOM
+    => tabindex attribute in HTML is represented as tabIndex in DOM
+    => Exceptions: attributes like class is represented as className in DOM
+    */
+    console.log(element.className); // extra-notes
+
+    // CSS-DOM Mapping
+    /* Points to remember:
+    =>  color in CSS is represented as color in DOM
+    =>  background-color in CSS is represented as backgroundColor in DOM
+    =>  -webkit-box-shadow in CSS is represented as webkitBoxShadow in DOM
+    =>  Exceptions : float in CSS is represented as cssFloat in DOM
+    */
+    element = document.getElementById("here")
+    color = element.style.backgroundColor
+    console.log(color); // blue
+    element.style.backgroundColor = "yellow";
+    element.style.fontSize = "20px";
+
+    // Dynamic Style Manipulation
+    element = document.getElementById("important-content");
+    element.className = "description";  // Change the class name to change many css properties
+
 </script>
 </body>
 
