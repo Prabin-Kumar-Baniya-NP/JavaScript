@@ -58,6 +58,8 @@
         <li>Keyboard</li>
         <li>Monitor</li>
     </ul>
+    <p id = "tokenlist" class="class_1 class_2">DOMTokenList</p>
+    <p id = "css_style_dec" style="background-color: orangered; color: black; font-weight: bolder;">CSS STYLE DECLARATION</p>
 <script>
     // getElementById
     var result1 = document.getElementById("hero");
@@ -389,6 +391,47 @@
     element = document.getElementById("important-content");
     element.className = "description";  // Change the class name to change many css properties
 
+    // classList - returns DOMTokenList
+    element = document.getElementById("tokenlist");
+    class_list = element.classList;
+    console.log(class_list);
+    /* Output
+    DOMTokenList(2)
+    0: "class_1"
+    1: "class_2"
+    length: 2
+    value: "class_1 class_2"
+    __proto__: DOMTokenList
+    */
+    console.log(class_list[0]);     // class_1
+    console.log(class_list.length); // 2
+    console.log(class_list.value);  // class_1 class_2
+    console.log(class_list.item(1)); // class_2
+    class_list.add("class_3");
+    class_list.add("class_4");
+    class_list.replace("class_3", "class_2");
+    console.log(class_list); // DOMTokenList(3) ["class_1", "class_2", "class_4", value: "class_1 class_2 class_4"]
+
+    // CSS-STYLE-DECLARATION
+    element = document.getElementById("css_style_dec");
+    var p = element.style;
+    console.log(element.style);
+    console.log(element.style[0]); // background-color
+    console.log(p.length);
+    console.log(p.cssText);  // background-color: orangered; color: black; font-weight: lighter;
+    p.cssText = "background-color: blue; color: white;"  // Sets the new css property, deletes the previos property
+    console.log(p.getPropertyValue("background-color"));  // blue
+    console.log(p.removeProperty("color"));
+    p.setProperty("font-size","40px","important");
+    console.log(p.getPropertyPriority("font-size"));  // important
+
+    // Computed Style - The final CSS style that is applied by combining inline style, internal style, external style and also from browser
+    all_css_property = window.getComputedStyle(element);
+    console.log(all_css_property);
+    console.log(all_css_property[2]);
+    console.log(all_css_property.fontSize);
+
+    
 </script>
 </body>
 
