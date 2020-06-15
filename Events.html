@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Events</title>
+        <style>
+            #A,
+            #one,
+            #first {
+                width: 400px;
+                height: 400px;
+                background-color: blue;
+                padding: 25px 25px 25px 25px;
+            }
+            #B,
+            #two,
+            #second {
+                width: 300px;
+                height: 300px;
+                background-color: green;
+                padding: 25px 25px 25px 25px;
+            }
+            #C,
+            #three,
+            #third {
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                padding: 25px 25px 25px 25px;
+            }
+            #D,
+            #four,
+            #fourth {
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                padding: 25px 25px 25px 25px;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="show();">Click Me</button>  <!-- Event Binding With HTML arrtibute-->
+        <button id = "submit">Submit</button>
+        <button id = "alert">Alert Me</button>
+        <button id = "eventListener">Listen The Event</button>
+        <div id = "parent" onclick="alert('Bubbling and Capture Phase');"> Parent
+            <div id ="one">1
+                <div id = "two">2
+                    <div id = "three">3
+                        <div id = "four">4 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id = "event_object">Event Object</button>
+        <h3>Target VS Current Target</h3>
+        <div id ="first" data-name="1">1 
+            <div id = "second" data-name="2">2
+                <div id = "third" data-name="3">3
+                    <div id= "fourth" data-name="4">4
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>stopPropagation and stopImmediatePropagation</h3>
+        <div id ="A">A
+            <div id ="B">B
+                <div id ="C">C
+                    <div id ="D">D</div>
+                </div>
+            </div>
+        </div>
+        <a href="https://www.google.com" id = "link">Google</a>
+        <script>
+            function show(){
+                alert("Events in JavaScript");
+            }
+            document.getElementById("submit").onclick = function(){
+                alert("Thanks For Submmission");
+            }
+            function show(){
+                alert("Get alerted Please");
+            }
+            document.getElementById("alert").onclick = show;   // <----No parenthesis required
+            var btn = document.getElementById("eventListener");
+            // addEventListener
+            // Syntax: Object.addEventListener(event, handler, capturePhase)
+            btn.addEventListener("click",show, false);  // false -> bubbling phase
+            btn.addEventListener("click",show,true);  // true -> Capture phase
+
+            // removeEventListener
+            btn.removeEventListener("click",show,true);   // removes event having true only not false one..
+
+            // Bubbling Phase
+            document.getElementById("one").addEventListener("click",function() { console.log("1")}, false);
+            document.getElementById("two").addEventListener("click",function() { console.log("2")}, false);
+            document.getElementById("three").addEventListener("click",function() { console.log("3")}, false);
+            document.getElementById("four").addEventListener("click",function() { console.log("4")}, false);
+
+            // Capture Phase
+            // document.getElementById("one").addEventListener("click",function() { console.log("1")}, true);
+            // document.getElementById("two").addEventListener("click",function() { console.log("2")}, true);
+            // document.getElementById("three").addEventListener("click",function() { console.log("3")}, true);
+            // document.getElementById("four").addEventListener("click",function() { console.log("4")}, true);
+
+            // Event Object
+            document.getElementById("event_object").addEventListener("click", function(e) {
+                console.log(e.clientX);
+                console.log(e.clientY);
+            })
+
+            // Target Vs Current Target
+            document.getElementById("first").addEventListener("click", function(e){
+                console.log(e);
+                console.log("Target",e.target.dataset.name);
+                console.log("Current Target",e.currentTarget.dataset.name);
+            })
+            document.getElementById("second").addEventListener("click", function(e){
+                console.log("Target",e.target.dataset.name);
+                console.log("Current Target",e.currentTarget.dataset.name);
+            })
+            document.getElementById("third").addEventListener("click", function(e){
+                console.log("Target",e.target.dataset.name);
+                console.log("Current Target",e.currentTarget.dataset.name);
+            })
+            document.getElementById("fourth").addEventListener("click", function(e){
+                console.log("Target",e.target.dataset.name);
+                console.log("Current Target",e.currentTarget.dataset.name);
+            })
+
+            // stopPropagation and stopImmediatePropagation methods
+            document.getElementById("A").addEventListener("click", function(e){
+                this.style.backgroundColor = "lime";
+            });
+            document.getElementById("B").addEventListener("click", function(e){
+                this.style.backgroundColor = "maroon";
+                e.stopPropagation();
+            });
+            // Using stopPropagation, all the events associated to that object will be propagated 
+            // So the below events of chnaging width, height will also be propagated
+            // Using stopImmediateProgation in above event, the events below will not be propagated, it will be immediately stopped 
+            document.getElementById("B").addEventListener("click", function(e){
+                this.style.width = "600px";
+                this.style.height = "600px";
+            });
+            document.getElementById("C").addEventListener("click", function(e){
+                this.style.backgroundColor = "purple";
+            });
+            document.getElementById("D").addEventListener("click", function(e){
+                this.style.backgroundColor = "silver";
+            });
+
+            // preventDefault()
+            function stoplink(e){
+                e.preventDefault();  // removes all the default behaviour of element
+            }
+            element = document.getElementById("link");
+            element.addEventListener("click",stoplink);
+        </script>
+    </body>
+</html>
