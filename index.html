@@ -1,8 +1,42 @@
 <html>
-    <head>
-        <title>JavaScript</title>
-    </head>
-    <body>
-<script src="arrays.js"></script>
-    </body>
+
+<head>
+    <title>JavaScript</title>
+    <style>
+        div {
+            height: 30%;
+            width: 50%;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="topic">
+        <h1>Lorem Ipsum</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci itaque, cumque, vitae necessitatibus
+            consectetur atque excepturi dolorum dolores magnam ipsam recusandae expedita, distinctio harum minus maxime
+            ut deserunt similique earum.</p>
+    </div>
+    <script>
+        function change_css_on_hover(e){
+            this.style.backgroundColor = "yellow";
+            this.style.color = "red";
+            this.style.height = "50%";
+            this.style.width = "70%";
+        }
+        function change_css_on_out(e){
+            this.style.backgroundColor = "black";
+            this.style.color = "white";
+            this.style.height = "30%";
+            this.style.width = "50%";
+        }
+        target = document.getElementById("topic");
+        target.addEventListener("mouseover",change_css_on_hover);
+        target.addEventListener("mouseout", change_css_on_out);
+
+    </script>
+</body>
 </html>
